@@ -11,7 +11,11 @@ export const billApi = baseApi.injectEndpoints({
       invalidatesTags: ["BILL", "ORDER"],
     }),
     getBills: builder.query({
-      query: () => ({ url: "/bills", method: "GET" }),
+      query: (date?: string) => ({
+        url: "/bills",
+        method: "GET",
+        params: date ? { date } : undefined,
+      }),
       providesTags: ["BILL"],
     }),
   }),
