@@ -11,6 +11,7 @@ import { OrderCard } from "@/components/OrderCard";
 import { NewOrderForm } from "@/components/NewOrderForm";
 import { GenerateBillDialog } from "@/components/GenerateBillDialog";
 import type { IOrder } from "@/types";
+import { BillHistory } from "@/components/BillHistory";
 export default function CounterDashboard() {
   const { data: ordersRes, refetch } = useGetOrdersQuery(undefined, {
     pollingInterval: 10000,
@@ -36,16 +37,11 @@ export default function CounterDashboard() {
   };
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 space-y-8">
-      {" "}
-      <h1 className="text-2xl font-semibold">Counter</h1>{" "}
+      <h1 className="text-2xl font-semibold">Counter</h1>
       <section className="space-y-4">
-        {" "}
         <Button variant="outline" onClick={() => setShowNewOrder((s) => !s)}>
-          {" "}
-          {showNewOrder
-            ? "Hide walk-in order form"
-            : "+ New walk-in order"}{" "}
-        </Button>{" "}
+          {showNewOrder ? "Hide walk-in order form" : "+ New walk-in order"}
+        </Button>
         {showNewOrder && (
           <NewOrderForm
             orderType="walk-in"
@@ -54,21 +50,18 @@ export default function CounterDashboard() {
               setShowNewOrder(false);
             }}
           />
-        )}{" "}
-      </section>{" "}
+        )}
+      </section>
       {pending.length > 0 && (
         <section className="space-y-4">
-          {" "}
-          <h2 className="text-lg font-medium">Waiting for confirmation</h2>{" "}
+          <h2 className="text-lg font-medium">Waiting for confirmation</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {" "}
             {pending.map((o) => (
               <OrderCard
                 key={o._id}
                 order={o}
                 actions={
                   <>
-                    {" "}
                     <Button
                       size="sm"
                       onClick={() =>
@@ -78,9 +71,8 @@ export default function CounterDashboard() {
                         )
                       }
                     >
-                      {" "}
-                      Confirm{" "}
-                    </Button>{" "}
+                      Confirm
+                    </Button>
                     <Button
                       size="sm"
                       variant="outline"
@@ -91,27 +83,23 @@ export default function CounterDashboard() {
                         )
                       }
                     >
-                      {" "}
-                      Cancel{" "}
-                    </Button>{" "}
+                      Cancel
+                    </Button>
                   </>
                 }
               />
-            ))}{" "}
-          </div>{" "}
+            ))}
+          </div>
         </section>
-      )}{" "}
+      )}
       <section className="space-y-4">
-        {" "}
         <div className="flex items-center justify-between">
-          {" "}
-          <h2 className="text-lg font-medium">In progress</h2>{" "}
+          <h2 className="text-lg font-medium">In progress</h2>
           <Button variant="outline" size="sm" onClick={() => refetch()}>
             Refresh
-          </Button>{" "}
-        </div>{" "}
+          </Button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {" "}
           {inProgress.map((o) => (
             <OrderCard
               key={o._id}
@@ -124,24 +112,21 @@ export default function CounterDashboard() {
                       handle(() => markServed(o._id).unwrap(), "Marked served")
                     }
                   >
-                    {" "}
-                    Mark served{" "}
+                    Mark served
                   </Button>
                 ) : undefined
               }
             />
-          ))}{" "}
+          ))}
           {inProgress.length === 0 && (
             <p className="text-muted-foreground">Nothing in progress.</p>
-          )}{" "}
-        </div>{" "}
-      </section>{" "}
+          )}
+        </div>
+      </section>
       {readyToBill.length > 0 && (
         <section className="space-y-4">
-          {" "}
-          <h2 className="text-lg font-medium">Ready to bill</h2>{" "}
+          <h2 className="text-lg font-medium">Ready to bill</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {" "}
             {readyToBill.map((o) => (
               <OrderCard
                 key={o._id}
@@ -150,10 +135,11 @@ export default function CounterDashboard() {
                   <GenerateBillDialog orderId={o._id} onGenerated={refetch} />
                 }
               />
-            ))}{" "}
-          </div>{" "}
+            ))}
+          </div>
+          <BillHistory />
         </section>
-      )}{" "}
+      )}
     </div>
   );
 }
