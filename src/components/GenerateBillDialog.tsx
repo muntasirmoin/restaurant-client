@@ -68,14 +68,17 @@ export const GenerateBillDialog = ({ orderId, onGenerated }: Props) => {
             <p className="text-sm text-muted-foreground">
               Bill generated successfully.
             </p>{" "}
-            <a
-              href={`${config.baseUrl}/bills/${generatedBillId}/receipt`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Button asChild className="w-full">
               {" "}
-              <Button className="w-full">Download receipt (PDF)</Button>{" "}
-            </a>{" "}
+              <a
+                href={`${config.baseUrl}/bills/${generatedBillId}/receipt`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                Download receipt (PDF){" "}
+              </a>{" "}
+            </Button>
             <Button
               variant="outline"
               className="w-full"
