@@ -51,51 +51,40 @@ export const GenerateBillDialog = ({ orderId, onGenerated }: Props) => {
   };
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      {" "}
       <DialogTrigger asChild>
-        {" "}
-        <Button size="sm">Generate bill</Button>{" "}
-      </DialogTrigger>{" "}
+        <Button size="sm">Generate bill</Button>
+      </DialogTrigger>
       <DialogContent>
-        {" "}
         <DialogHeader>
-          {" "}
-          <DialogTitle>Generate bill</DialogTitle>{" "}
-        </DialogHeader>{" "}
+          <DialogTitle>Generate bill</DialogTitle>
+        </DialogHeader>
         {generatedBillId ? (
           <div className="space-y-4">
-            {" "}
             <p className="text-sm text-muted-foreground">
               Bill generated successfully.
-            </p>{" "}
+            </p>
             <Button asChild className="w-full">
-              {" "}
               <a
                 href={`${config.baseUrl}/bills/${generatedBillId}/receipt`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {" "}
-                Download receipt (PDF){" "}
-              </a>{" "}
+                Download receipt (PDF)
+              </a>
             </Button>
             <Button
               variant="outline"
               className="w-full"
               onClick={() => handleOpenChange(false)}
             >
-              {" "}
-              Close{" "}
-            </Button>{" "}
+              Close
+            </Button>
           </div>
         ) : (
           <>
-            {" "}
             <div className="space-y-4">
-              {" "}
               <div className="space-y-2">
-                {" "}
-                <Label htmlFor="discount">Discount ($)</Label>{" "}
+                <Label htmlFor="discount">Discount ($)</Label>
                 <Input
                   id="discount"
                   type="number"
@@ -103,36 +92,30 @@ export const GenerateBillDialog = ({ orderId, onGenerated }: Props) => {
                   step="0.01"
                   value={discount}
                   onChange={(e) => setDiscount(e.target.value)}
-                />{" "}
-              </div>{" "}
+                />
+              </div>
               <div className="space-y-2">
-                {" "}
-                <Label>Payment method</Label>{" "}
+                <Label>Payment method</Label>
                 <Select value={paymentMethod} onValueChange={setPaymentMethod}>
-                  {" "}
                   <SelectTrigger>
-                    {" "}
-                    <SelectValue />{" "}
-                  </SelectTrigger>{" "}
+                    <SelectValue />
+                  </SelectTrigger>
                   <SelectContent>
-                    {" "}
-                    <SelectItem value="cash">Cash</SelectItem>{" "}
-                    <SelectItem value="card">Card</SelectItem>{" "}
-                    <SelectItem value="mobile">Mobile</SelectItem>{" "}
-                  </SelectContent>{" "}
-                </Select>{" "}
-              </div>{" "}
-            </div>{" "}
+                    <SelectItem value="cash">Cash</SelectItem>
+                    <SelectItem value="card">Card</SelectItem>
+                    <SelectItem value="mobile">Mobile</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
             <DialogFooter>
-              {" "}
               <Button disabled={isLoading} onClick={submit}>
-                {" "}
-                {isLoading ? "Generating..." : "Confirm"}{" "}
-              </Button>{" "}
-            </DialogFooter>{" "}
+                {isLoading ? "Generating..." : "Confirm"}
+              </Button>
+            </DialogFooter>
           </>
-        )}{" "}
-      </DialogContent>{" "}
+        )}
+      </DialogContent>
     </Dialog>
   );
 };
