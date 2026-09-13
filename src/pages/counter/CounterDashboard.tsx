@@ -137,9 +137,9 @@ export default function CounterDashboard() {
               />
             ))}
           </div>
-          <BillHistory />
         </section>
       )}
+      <BillHistory />
     </div>
   );
 }

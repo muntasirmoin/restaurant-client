@@ -19,7 +19,8 @@ interface IBillHistoryItem {
 export const BillHistory = () => {
   const [date, setDate] = useState("");
   const { data: billsRes, isFetching } = useGetBillsQuery(date || undefined);
-  const bills: IBillHistoryItem[] = billsRes?.data ?? [];
+  const allBills: IBillHistoryItem[] = billsRes?.data ?? [];
+  const bills = date ? allBills : allBills.slice(0, 5);
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
