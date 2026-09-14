@@ -24,7 +24,15 @@ export const BillHistory = () => {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-lg font-medium">Bill history</h2>
+        <h2 className="text-lg font-medium">
+          {date ? "Bill history" : "Recent bills"}
+        </h2>
+        {!date && (
+          <p className="text-xs text-muted-foreground">
+            Showing your 5 most recent bills. Pick a date above to see a full
+            day's history.
+          </p>
+        )}
         <div className="flex items-center gap-2">
           <Input
             type="date"
