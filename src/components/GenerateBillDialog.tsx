@@ -60,25 +60,34 @@ export const GenerateBillDialog = ({ orderId, onGenerated }: Props) => {
         </DialogHeader>
         {generatedBillId ? (
           <div className="space-y-4">
+            {" "}
             <p className="text-sm text-muted-foreground">
               Bill generated successfully.
-            </p>
-            <Button asChild className="w-full">
+            </p>{" "}
+            <iframe
+              src={`${config.baseUrl}/bills/${generatedBillId}/receipt`}
+              title="Receipt"
+              className="w-full h-[400px] rounded-md border"
+            />{" "}
+            <Button asChild variant="outline" className="w-full">
+              {" "}
               <a
-                href={`${config.baseUrl}/bills/${generatedBillId}/receipt`}
+                href={`${config.baseUrl}/bills/${generatedBillId}/receipt?download=true`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Download receipt (PDF)
-              </a>
-            </Button>
+                {" "}
+                Download{" "}
+              </a>{" "}
+            </Button>{" "}
             <Button
               variant="outline"
               className="w-full"
               onClick={() => handleOpenChange(false)}
             >
-              Close
-            </Button>
+              {" "}
+              Close{" "}
+            </Button>{" "}
           </div>
         ) : (
           <>

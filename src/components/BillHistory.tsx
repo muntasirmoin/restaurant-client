@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useGetBillsQuery } from "@/redux/features/Bill/bill.api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import config from "@/config";
+
+import { ViewReceiptDialog } from "./ViewReceiptDialog";
 interface IBillHistoryItem {
   _id: string;
   total: number;
@@ -78,15 +79,7 @@ export const BillHistory = () => {
               </div>
               <div className="flex items-center gap-3">
                 <span className="font-semibold">${bill.total.toFixed(2)}</span>
-                <Button asChild size="sm" variant="outline">
-                  <a
-                    href={`${config.baseUrl}/bills/${bill._id}/receipt`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Receipt
-                  </a>
-                </Button>
+                <ViewReceiptDialog billId={bill._id} />
               </div>
             </div>
           );
